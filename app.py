@@ -1,10 +1,10 @@
 # 导入flask模块的Flask类
-from flask import Flask ,flash
+from flask import Flask
 from flask import url_for
 from flask import redirect
-from user import user
+from application.api.user import app_user
 from flask import request
-from upload import upload
+from application.api.upload import app_upload
 
 
 # 创建一个Flask类型的对象
@@ -20,8 +20,8 @@ from upload import upload
 app = Flask(__name__)
 
 # 注册蓝本
-app.register_blueprint(user)
-app.register_blueprint(upload)
+app.register_blueprint(app_user)
+app.register_blueprint(app_upload)
 
 
 @app.route('/')

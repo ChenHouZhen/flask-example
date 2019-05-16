@@ -5,8 +5,9 @@ from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from chaojiying import Chaojiying_Client
-import ali
+from application.main.chaojiying import Chaojiying_Client
+from application.main import ali
+
 
 class Bill(object):
     def __init__(self):

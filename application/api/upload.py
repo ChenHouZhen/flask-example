@@ -1,31 +1,29 @@
 import os
-from flask import Flask, render_template, send_from_directory, request, jsonify ,make_response, send_file
+from flask import render_template, request, jsonify ,make_response, send_file
 import time
-from flask import Blueprint, url_for
-from bill import Bill
+from application.main.bill import Bill
+from application.api import app_upload
 
-
-# 创建对象，可以指定统一的前缀
-upload = Blueprint('upload', __name__, url_prefix='/upload')
 
 UPLOAD_FOLDER = 'upload'
 # upload.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER  # 设置文件上传的目标文件夹
 basedir = os.path.abspath(os.path.dirname(__file__))  # 获取当前项目的绝对路径
 ALLOWED_EXTENSIONS = set(['txt', 'png', 'jpg', 'xls', 'JPG', 'PNG', 'xlsx', 'gif', 'GIF'])  # 允许上传的文件后缀
 
+
 # 判断文件是否合法
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
+
 # 具有上传功能的页面
-@upload.route('/page')
+@app_upload.route('/page')
 def upload_test():
-    print("--------------")
     return render_template('upload.html')
 
-@upload.route('/api/upload', methods=['POST'], strict_slashes=False)
+
+@app_upload.route('/api/upload', methods=['POST'], strict_slashes=False)
 def api_upload():
-    print("===============")
     file_dir = os.path.join(basedir, UPLOAD_FOLDER)  # 拼接成合法文件夹地址
     if not os.path.exists(file_dir):
         os.makedirs(file_dir)  # 文件夹不存在就创建
