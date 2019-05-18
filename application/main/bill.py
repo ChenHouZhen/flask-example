@@ -18,7 +18,7 @@ class Bill(object):
         # self.driver = webdriver.Firefox()
         # self.driver.set_window_size(1920, 1080)
         self.driver = webdriver.Chrome()
-        self.driver.set_window_size(1920, 1080)
+        # self.driver.set_window_size(1920, 1080)
         self.wait = WebDriverWait(self.driver, 10)
 
 
@@ -86,7 +86,7 @@ def auto_img(path, driver):
     driver.get_screenshot_as_file(old_path)  # 对整个网页截取保存
     imgelement = driver.find_element_by_xpath('.//*[@id="picimg"]')  # 定位验证码
     # imgelement = driver.find_element_by_css_selector(".wrapper .swordfrom_div img")
-    location = imgelement.location  # 获取验证码x,y轴坐标
+    location = imgelement.location  # 获取验证码x,y轴坐标mmnm
     size = imgelement.size  # 获取验证码的长宽
     rangle = (int(location['x']), int(location['y']), int(location['x'] + size['width']),int(location['y'] + size['height']))  # 写成我们需要截取的位置坐标
     i = Image.open(old_path)  # 打开截图
